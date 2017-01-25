@@ -1,37 +1,36 @@
 package ru.academits.gusev.range;
 
 public class Range {
-    private int from;
-    private int to;
+    private double from;
+    private double to;
 
-    public Range(int from, int to) {
+    public Range(double from, double to) {
         this.from = from;
         this.to = to;
     }
 
-    public int getFrom() {
+    public double getFrom() {
         return from;
     }
 
-    public int getTo() {
+    public double getTo() {
         return to;
     }
 
-    public void setFrom(int from) {
+    public void setFrom(double from) {
         this.from = from;
     }
 
-    public void setTo(int to) {
+    public void setTo(double to) {
         this.to = to;
     }
 
-    public boolean isInside(int number) {
-        for (int i = from; i <= to; i++) {
-            if (i == number) {
-                return true;
-            }
-        }
-        return false;
+    public boolean isInside(double number) {
+        return (number >= from && number <= to);
+    }
+
+    public double lenghtRange() {
+        return (to - from);
     }
 
 }
