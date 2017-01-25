@@ -29,7 +29,7 @@ public class Range {
         return (number >= from && number <= to);
     }
 
-    public double lenghtRange() {
+    public double lengthRange() {
         return (to - from);
     }
 
