@@ -13,7 +13,7 @@ public class Main {
         } else {
             System.out.printf("Число %.2f не принадлежит диапазону от %.2f до %.2f", number, range.getFrom(), range.getTo());
         }
-        System.out.printf(System.lineSeparator() + "Длина интервала: %.2f", range.lenghtRange());
+        System.out.printf(System.lineSeparator() + "Длина интервала: %.2f", range.lengthRange());
     }
 }
 
