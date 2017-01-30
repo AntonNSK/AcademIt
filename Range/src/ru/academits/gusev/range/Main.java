@@ -6,7 +6,7 @@ public class Main {
 
         Range range1 = new Range(1, 10);
         Range range2 = new Range(7.3, 15.5);
-        range1.setFrom(5.9);
+        range1.setFrom(8.9);
         range1.setTo(10.3);
 
         if (range1.isInside(number)) {
