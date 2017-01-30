@@ -33,31 +33,40 @@ public class Range {
         return (to - from);
     }
 
-    public Range doIntersection(Range variant) {
-        if (to < variant.getFrom() || from > variant.getTo()) {
-            return null;
+    public boolean checkIntersection(Range variant) {
+        if (from > variant.getTo() || to < variant.getFrom()) {
+            return false;
         }
-        return new Range(from < variant.getFrom() ? variant.getFrom() : from, to < variant.getTo() ? to : variant.getTo());
+        return true;
     }
 
-    public Range[] doUnion(Range variant) {
-
-        if (to < variant.getFrom()) {
-            return new Range[]{new Range(from, to), new Range(variant.getFrom(), variant.getTo())};
+    public Range intersection(Range variant) {
+        if (checkIntersection(variant)) {
+            return new Range(Math.max(from, variant.getFrom()), Math.min(to, variant.getTo()));
         }
-        if (from > variant.getTo()) {
-            return new Range[]{new Range(variant.getFrom(), variant.getTo()), new Range(from, to)};
-        }
-        return new Range[]{new Range(from < variant.getFrom() ? from : variant.getFrom(), to < variant.getTo() ? variant.getTo() : to)};
+        return null;
     }
 
-    public Range[] doDifference(Range variant) {
-        if (to < variant.getFrom() || from > variant.getTo()) {
-            return new Range[]{new Range(from, to)};
+    public Range[] union(Range variant) {
+        if (checkIntersection(variant)) {
+            return new Range[]{new Range(Math.min(from, variant.getFrom()), Math.max(to, variant.getTo()))};
         }
-        if (from < variant.getFrom() && to > variant.getTo()) {
-            return new Range[]{new Range(from, variant.getFrom()), new Range(variant.getTo(), to)};
+        return new Range[]{new Range(Math.min(from, variant.getFrom()), Math.min(to, variant.getTo())), new Range(Math.max(from, variant.getFrom()), Math.max(to, variant.getTo()))};
+    }
+
+    public Range[] difference(Range variant) {
+        if (checkIntersection(variant)) {
+            if (from > variant.getFrom() && to < variant.getTo()) {
+                return new Range[0];
+            }
+            if (from < variant.getFrom() && to > variant.getTo()) {
+                return new Range[]{new Range(from, variant.getFrom()), new Range(variant.getTo(), to)};
+            }
+            if (from < variant.getFrom()) {
+                return new Range[]{new Range(from, variant.getFrom())};
+            }
+            return new Range[]{new Range(variant.getTo(), to)};
         }
-        return new Range[]{new Range(from < variant.getFrom() ? from : variant.getTo(), to < variant.getTo() ? variant.getFrom() : to)};
+        return new Range[]{new Range(from, to)};
     }
 }
