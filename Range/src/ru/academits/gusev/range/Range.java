@@ -56,13 +56,13 @@ public class Range {
 
     public Range[] difference(Range variant) {
         if (checkIntersection(variant)) {
-            if (from > variant.getFrom() && to < variant.getTo()) {
+            if (!isInside(variant.getFrom()) && !isInside(variant.getTo())) {
                 return new Range[0];
             }
-            if (from < variant.getFrom() && to > variant.getTo()) {
+            if (isInside(variant.getFrom()) && isInside(variant.getTo())) {
                 return new Range[]{new Range(from, variant.getFrom()), new Range(variant.getTo(), to)};
             }
-            if (from < variant.getFrom()) {
+            if (isInside(variant.getFrom())) {
                 return new Range[]{new Range(from, variant.getFrom())};
             }
             return new Range[]{new Range(variant.getTo(), to)};

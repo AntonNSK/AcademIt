@@ -6,8 +6,8 @@ public class Main {
 
         Range range1 = new Range(1, 10);
         Range range2 = new Range(7.3, 15.5);
-        range1.setFrom(8.9);
-        range1.setTo(13.3);
+        range1.setFrom(5.9);
+        range1.setTo(10.3);
 
         if (range1.isInside(number)) {
             System.out.printf("Число %.2f принадлежит диапазону от %.2f до %.2f", number, range1.getFrom(), range1.getTo());
