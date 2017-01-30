@@ -22,18 +22,16 @@ public class Main {
             System.out.printf(System.lineSeparator() + "Пересечение интервалов - интервал от %.2f до %.2f", intersection.getFrom(), intersection.getTo());
         }
 
-        Range union = range1.doUnion(range2);
-        if (range1.isInside(range2.getFrom()) || range1.isInside(range2.getTo())) {
-            System.out.printf(System.lineSeparator() + "Объединение интервалов - интервал от %.2f до %.2f", union.getFrom(), union.getTo());
-        } else {
-            System.out.printf(System.lineSeparator() + "Объединение интервалов - интервал от %.2f до %.2f и интервал от %.2f до %.2f", union.getFrom(), union.getTo(), union.getFrom1(), union.getTo1());
+        Range union[] = range1.doUnion(range2);
+        System.out.printf(System.lineSeparator() + "Объединение интервалов -");
+        for (Range range : union) {
+            System.out.printf(" интервал от %.2f до %.2f", range.getFrom(), range.getTo());
         }
 
-        Range difference = range1.doDifference(range2);
-        if (range1.isInside(range2.getFrom()) && range1.isInside(range2.getTo())) {
-            System.out.printf(System.lineSeparator() + "Вычитание интервалов - интервал от %.2f до %.2f и интервал от %.2f до %.2f", difference.getFrom(), difference.getTo(), difference.getFrom1(), difference.getTo1());
-        } else {
-            System.out.printf(System.lineSeparator() + "Вычитание интервалов - интервал от %.2f до %.2f", difference.getFrom(), difference.getTo());
+        Range difference[] = range1.doDifference(range2);
+        System.out.printf(System.lineSeparator() + "Вычитание интервалов -");
+        for (Range range : difference) {
+            System.out.printf(" интервал от %.2f до %.2f", range.getFrom(), range.getTo());
         }
     }
 }

@@ -3,19 +3,10 @@ package ru.academits.gusev.range;
 public class Range {
     private double from;
     private double to;
-    private double from1;
-    private double to1;
 
     public Range(double from1, double to1) {
         this.from = from1;
         this.to = to1;
-    }
-
-    public Range(double from, double to, double from1, double to1) {
-        this.from = from;
-        this.to = to;
-        this.from1 = from1;
-        this.to1 = to1;
     }
 
     public double getFrom() {
@@ -24,14 +15,6 @@ public class Range {
 
     public double getTo() {
         return to;
-    }
-
-    public double getFrom1() {
-        return from1;
-    }
-
-    public double getTo1() {
-        return to1;
     }
 
     public void setFrom(double from) {
@@ -51,41 +34,30 @@ public class Range {
     }
 
     public Range doIntersection(Range variant) {
-        double from = this.from;
-        double to = this.to;
-        double from1 = variant.getFrom();
-        double to1 = variant.getTo();
-
-        if (to < from1 || from > to1) {
+        if (to < variant.getFrom() || from > variant.getTo()) {
             return null;
         }
-        return new Range(from < from1 ? from1 : from, to < to1 ? to : to1);
+        return new Range(from < variant.getFrom() ? variant.getFrom() : from, to < variant.getTo() ? to : variant.getTo());
     }
 
-    public Range doUnion(Range variant) {
-        double from = this.from;
-        double to = this.to;
-        double from1 = variant.getFrom();
-        double to1 = variant.getTo();
+    public Range[] doUnion(Range variant) {
 
-        if (to < from1 || from > to1) {
-            return new Range(from, to, from1, to1);
+        if (to < variant.getFrom()) {
+            return new Range[]{new Range(from, to), new Range(variant.getFrom(), variant.getTo())};
         }
-        return new Range(from < from1 ? from : from1, to < to1 ? to1 : to);
+        if (from > variant.getTo()) {
+            return new Range[]{new Range(variant.getFrom(), variant.getTo()), new Range(from, to)};
+        }
+        return new Range[]{new Range(from < variant.getFrom() ? from : variant.getFrom(), to < variant.getTo() ? variant.getTo() : to)};
     }
 
-    public Range doDifference(Range variant) {
-        double from = this.from;
-        double to = this.to;
-        double from1 = variant.getFrom();
-        double to1 = variant.getTo();
-
-        if (to < from1 || from > to1) {
-            return new Range(from, to);
+    public Range[] doDifference(Range variant) {
+        if (to < variant.getFrom() || from > variant.getTo()) {
+            return new Range[]{new Range(from, to)};
         }
-        if (from < from1 && to > to1) {
-            return new Range(from, from1, to1, to);
+        if (from < variant.getFrom() && to > variant.getTo()) {
+            return new Range[]{new Range(from, variant.getFrom()), new Range(variant.getTo(), to)};
         }
-        return new Range(from < from1 ? from : to1, to < to1 ? from1 : to);
+        return new Range[]{new Range(from < variant.getFrom() ? from : variant.getTo(), to < variant.getTo() ? variant.getFrom() : to)};
     }
 }
