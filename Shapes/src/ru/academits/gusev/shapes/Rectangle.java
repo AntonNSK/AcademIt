@@ -1,7 +1,5 @@
 package ru.academits.gusev.shapes;
 
-import java.awt.*;
-
 public class Rectangle extends Shape {
     private double sideLength1;
     private double sideLength2;
@@ -25,5 +23,9 @@ public class Rectangle extends Shape {
 
     public double getPerimeter() {
         return (sideLength1 + sideLength2) * 2;
+    }
+
+    public String toString() {
+        return "Прямоугольник со сторонами - " + sideLength1 + ", " + sideLength2;
     }
 }

@@ -25,19 +25,23 @@ public class Triangle extends Shape {
         return Math.max(y3, Math.max(y1, y2)) - Math.min(y3, Math.min(y1, y2));
     }
 
-    private double sideLength(double x1, double y1, double x2, double y2) {
+    private static double getSideLength(double x1, double y1, double x2, double y2) {
         return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
     }
 
     public double getPerimeter() {
-        return sideLength(x1, y1, x2, y2) + sideLength(x1, y1, x3, y3) + sideLength(x2, y2, x3, y3);
+        return getSideLength(x1, y1, x2, y2) + getSideLength(x1, y1, x3, y3) + getSideLength(x2, y2, x3, y3);
     }
 
     public double getArea() {
         double semiPerimeter = getPerimeter() / 2;
-        double sideLength1 = sideLength(x1, y1, x2, y2);
-        double sideLength2 = sideLength(x1, y1, x3, y3);
-        double sideLength3 = sideLength(x2, y2, x3, y3);
+        double sideLength1 = getSideLength(x1, y1, x2, y2);
+        double sideLength2 = getSideLength(x1, y1, x3, y3);
+        double sideLength3 = getSideLength(x2, y2, x3, y3);
         return Math.sqrt(semiPerimeter * (semiPerimeter - sideLength1) * (semiPerimeter - sideLength2) * (semiPerimeter - sideLength3));
+    }
+
+    public String toString() {
+        return "Треугольник с вершинами - (" + x1 + "," + y1 + ") (" + x2 + "," + y2 + ") (" + x3 + "," + y3 + ")";
     }
 }

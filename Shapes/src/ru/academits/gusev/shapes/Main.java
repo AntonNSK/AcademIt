@@ -4,12 +4,14 @@ package ru.academits.gusev.shapes;
 public class Main {
     public static void seekMaxArea(Shape... numbers) {
         double maxArea = 0.0;
+        Shape sMaxArea;
         for (Shape s : numbers) {
             if (s.getArea() > maxArea) {
                 maxArea = s.getArea();
+                sMaxArea = s;
             }
         }
-        System.out.printf("%.2f", maxArea);
+        System.out.println(sMaxArea.toString());
     }
 
     public static void seekSecondMaxPerimetr(Shape... numbers) {

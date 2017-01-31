@@ -1,6 +1,6 @@
 package ru.academits.gusev.shapes;
 
-public class Shape {
+abstract class Shape {
     public double getWidth() {
         return 0;
     }
