@@ -26,4 +26,20 @@ public class Square extends Shape {
     public String toString() {
         return "Квадрат со стороной - " + sideLength;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Square square = (Square) o;
+
+        return Double.compare(square.sideLength, sideLength) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        long temp = Double.doubleToLongBits(sideLength);
+        return (int) (temp ^ (temp >>> 32));
+    }
 }
