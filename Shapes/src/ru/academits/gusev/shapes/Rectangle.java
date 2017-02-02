@@ -9,14 +9,6 @@ public class Rectangle implements Shape {
         this.sideLength2 = sideLength2;
     }
 
-    public double getSideLength1() {
-        return sideLength1;
-    }
-
-    public double getSideLength2() {
-        return sideLength2;
-    }
-
     public double getWidth() {
         return sideLength1;
     }
@@ -37,8 +29,12 @@ public class Rectangle implements Shape {
         return "Прямоугольник со сторонами - " + sideLength1 + ", " + sideLength2;
     }
 
-    public boolean equals(Rectangle variant) {
-        return sideLength1 == variant.getSideLength1() && sideLength2 == variant.getSideLength2();
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Rectangle rectangle = (Rectangle) o;
+        return sideLength1 == rectangle.sideLength1 && sideLength2 == rectangle.sideLength2;
     }
 
     public int hashCode() {

@@ -3,10 +3,6 @@ package ru.academits.gusev.shapes;
 public class Circle implements Shape {
     private double radius;
 
-    public double getRadius() {
-        return radius;
-    }
-
     public Circle(double radius) {
         this.radius = radius;
     }
@@ -31,8 +27,12 @@ public class Circle implements Shape {
         return "Окружность с радиусом - " + radius;
     }
 
-    public boolean equals(Circle variant) {
-        return radius == variant.getRadius();
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Circle circle = (Circle) o;
+        return radius == circle.radius;
     }
 
     public int hashCode() {

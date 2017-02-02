@@ -9,4 +9,5 @@ public class Vector {
             vector [i] = 0;
         }
     }
+    public Vector (Vector)
 }

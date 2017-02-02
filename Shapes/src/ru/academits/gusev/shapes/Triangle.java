@@ -17,26 +17,6 @@ public class Triangle implements Shape {
         this.y3 = y3;
     }
 
-    public double getX1() {
-        return x1;
-    }
-
-    public double getY1() {
-        return y1;
-    }
-
-    public double getX2() {
-        return x2;
-    }
-
-    public double getY2() {
-        return y2;
-    }
-
-    public double getX3() {
-        return x3;
-    }
-
     public double getY3() {
         return y3;
     }
@@ -69,8 +49,12 @@ public class Triangle implements Shape {
         return "Треугольник с вершинами - (" + x1 + "," + y1 + ") (" + x2 + "," + y2 + ") (" + x3 + "," + y3 + ")";
     }
 
-    public boolean equals(Triangle variant) {
-        return x1 == variant.getX1() && y1 == variant.getY1() && x1 == variant.getX2() && y1 == variant.getY2() && x1 == variant.getX3() && y1 == variant.getY3();
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Triangle triangle = (Triangle) o;
+        return x1 == triangle.x1 && y1 == triangle.y1 && x2 == triangle.x2 && y2 == triangle.y2 && x3 == triangle.x3 && y3 == triangle.y3;
     }
 
     public int hashCode() {
