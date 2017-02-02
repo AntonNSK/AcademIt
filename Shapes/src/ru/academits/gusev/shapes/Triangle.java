@@ -17,10 +17,6 @@ public class Triangle implements Shape {
         this.y3 = y3;
     }
 
-    public double getY3() {
-        return y3;
-    }
-
     public double getWidth() {
         return Math.max(x3, Math.max(x1, x2)) - Math.min(x3, Math.min(x1, x2));
     }
@@ -50,6 +46,9 @@ public class Triangle implements Shape {
     }
 
     public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
         if (o == null || getClass() != o.getClass()) {
             return false;
         }

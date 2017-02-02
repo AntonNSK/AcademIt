@@ -3,16 +3,14 @@ package ru.academits.gusev.shapes;
 import java.util.Arrays;
 
 public class Main {
-    public static void seekMaxArea(Shape... shapes) {
+    public static Shape seekMaxArea(Shape... shapes) {
         Arrays.sort(shapes, new SortedByArea());
-        System.out.println("Фигура с максимальной площадью:");
-        System.out.println(shapes[shapes.length - 1].toString());
+        return shapes[shapes.length - 1];
     }
 
-    public static void seekSecondMaxPerimeter(Shape... shapes) {
+    public static Shape seekSecondMaxPerimeter(Shape... shapes) {
         Arrays.sort(shapes, new SortedByPerimeter());
-        System.out.println("Фигура с вторым по величине периметром:");
-        System.out.println(shapes[shapes.length - 2].toString());
+        return shapes[shapes.length - 2];
     }
 
     public static void main(String[] args) {
@@ -22,7 +20,7 @@ public class Main {
         Shape s4 = new Circle(5);
         Shape s5 = new Square(3);
 
-        seekMaxArea(s1, s2, s3, s4, s5);
-        seekSecondMaxPerimeter(s1, s2, s3, s4, s5);
+        System.out.println("Фигура с максимальной площадью:" + System.lineSeparator() + seekMaxArea(s1, s2, s3, s4, s5).toString());
+        System.out.println("Фигура со вторым по величине периметром:" + System.lineSeparator() + seekSecondMaxPerimeter(s1, s2, s3, s4, s5).toString());
     }
 }
