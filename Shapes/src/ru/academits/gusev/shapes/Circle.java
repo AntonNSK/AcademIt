@@ -1,7 +1,11 @@
 package ru.academits.gusev.shapes;
 
-public class Circle extends Shape {
+public class Circle implements Shape {
     private double radius;
+
+    public double getRadius() {
+        return radius;
+    }
 
     public Circle(double radius) {
         this.radius = radius;
@@ -27,19 +31,11 @@ public class Circle extends Shape {
         return "Окружность с радиусом - " + radius;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Circle circle = (Circle) o;
-
-        return Double.compare(circle.radius, radius) == 0;
+    public boolean equals(Circle variant) {
+        return radius == variant.getRadius();
     }
 
-    @Override
     public int hashCode() {
-        long temp = Double.doubleToLongBits(radius);
-        return (int) (temp ^ (temp >>> 32));
+        return (int) radius;
     }
 }

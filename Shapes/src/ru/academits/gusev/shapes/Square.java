@@ -1,10 +1,14 @@
 package ru.academits.gusev.shapes;
 
-public class Square extends Shape {
+public class Square implements Shape {
     private double sideLength;
 
     public Square(double sideLength) {
         this.sideLength = sideLength;
+    }
+
+    public double getSideLength() {
+        return sideLength;
     }
 
     public double getWidth() {
@@ -27,19 +31,11 @@ public class Square extends Shape {
         return "Квадрат со стороной - " + sideLength;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Square square = (Square) o;
-
-        return Double.compare(square.sideLength, sideLength) == 0;
+    public boolean equals(Square variant) {
+        return sideLength == variant.getSideLength();
     }
 
-    @Override
     public int hashCode() {
-        long temp = Double.doubleToLongBits(sideLength);
-        return (int) (temp ^ (temp >>> 32));
+        return (int) sideLength;
     }
 }

@@ -1,6 +1,6 @@
 package ru.academits.gusev.shapes;
 
-public class Triangle extends Shape {
+public class Triangle implements Shape {
     private double x1;
     private double y1;
     private double x2;
@@ -15,6 +15,30 @@ public class Triangle extends Shape {
         this.y2 = y2;
         this.x3 = x3;
         this.y3 = y3;
+    }
+
+    public double getX1() {
+        return x1;
+    }
+
+    public double getY1() {
+        return y1;
+    }
+
+    public double getX2() {
+        return x2;
+    }
+
+    public double getY2() {
+        return y2;
+    }
+
+    public double getX3() {
+        return x3;
+    }
+
+    public double getY3() {
+        return y3;
     }
 
     public double getWidth() {
@@ -45,37 +69,18 @@ public class Triangle extends Shape {
         return "Треугольник с вершинами - (" + x1 + "," + y1 + ") (" + x2 + "," + y2 + ") (" + x3 + "," + y3 + ")";
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Triangle triangle = (Triangle) o;
-
-        if (Double.compare(triangle.x1, x1) != 0) return false;
-        if (Double.compare(triangle.y1, y1) != 0) return false;
-        if (Double.compare(triangle.x2, x2) != 0) return false;
-        if (Double.compare(triangle.y2, y2) != 0) return false;
-        if (Double.compare(triangle.x3, x3) != 0) return false;
-        return Double.compare(triangle.y3, y3) == 0;
+    public boolean equals(Triangle variant) {
+        return x1 == variant.getX1() && y1 == variant.getY1() && x1 == variant.getX2() && y1 == variant.getY2() && x1 == variant.getX3() && y1 == variant.getY3();
     }
 
-    @Override
     public int hashCode() {
-        int result;
-        long temp;
-        temp = Double.doubleToLongBits(x1);
-        result = (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(y1);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(x2);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(y2);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(x3);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(y3);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        return result;
+        int prime = 31;
+        int result = 1;
+        result = prime * result + (int) x1;
+        result = prime * result + (int) y1;
+        result = prime * result + (int) x2;
+        result = prime * result + (int) y2;
+        result = prime * result + (int) x3;
+        return prime * result + (int) y3;
     }
 }
