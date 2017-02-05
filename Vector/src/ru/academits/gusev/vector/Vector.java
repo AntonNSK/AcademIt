@@ -1,7 +1,5 @@
 package ru.academits.gusev.vector;
 
-import java.util.Arrays;
-
 public class Vector {
     private int n;
     private double[] vector;
@@ -157,49 +155,65 @@ public class Vector {
     }
 
     public static Vector sum(Vector variant1, Vector variant2) {
-        if (variant1.n >= variant2.n) {
-            for (int i = 0; i < variant2.n; ++i) {
-                variant1.vector[i] = variant1.vector[i] + variant2.vector[i];
+        if (variant1.getSize() >= variant2.getSize()) {
+            Vector vector = new Vector(variant1.getSize());
+            for (int i = 0; i < variant1.getSize(); ++i) {
+                if (i < variant2.getSize()) {
+                    vector.setComponent(i, variant1.getComponent(i) + variant2.getComponent(i));
+                } else {
+                    vector.setComponent(i, variant1.getComponent(i));
+                }
             }
-            return new Vector(variant1.vector);
+            return vector;
         } else {
-            for (int i = 0; i < variant1.n; ++i) {
-                variant2.vector[i] = variant2.vector[i] + variant1.vector[i];
+            Vector vector = new Vector(variant2.getSize());
+            for (int i = 0; i < variant2.n; ++i) {
+                if (i < variant1.getSize()) {
+                    vector.setComponent(i, variant1.getComponent(i) + variant2.getComponent(i));
+                } else {
+                    vector.setComponent(i, variant2.getComponent(i));
+                }
             }
-            return new Vector(variant2.vector);
+            return vector;
         }
     }
 
     public static Vector subtract(Vector variant1, Vector variant2) {
-        if (variant1.n >= variant2.n) {
-            for (int i = 0; i < variant2.n; ++i) {
-                variant1.vector[i] = variant1.vector[i] - variant2.vector[i];
-            }
-            return new Vector(variant1.vector);
-        } else {
-            double[] vector1 = new double[variant2.n];
-            for (int i = 0; i < variant2.n; ++i) {
-                if (i < variant1.n) {
-                    vector1[i] = variant1.vector[i] - variant2.vector[i];
+        if (variant1.getSize() >= variant2.getSize()) {
+            Vector vector = new Vector(variant1.getSize());
+            for (int i = 0; i < variant1.getSize(); ++i) {
+                if (i < variant2.getSize()) {
+                    vector.setComponent(i, variant1.getComponent(i) - variant2.getComponent(i));
                 } else {
-                    vector1[i] = vector1[i] - variant2.vector[i];
+                    vector.setComponent(i, variant1.getComponent(i));
                 }
             }
-            variant1.vector = vector1;
-            return new Vector(variant1.vector);
+            return vector;
+        } else {
+            Vector vector = new Vector(variant2.getSize());
+            for (int i = 0; i < variant2.n; ++i) {
+                if (i < variant1.getSize()) {
+                    vector.setComponent(i, variant1.getComponent(i) - variant2.getComponent(i));
+                } else {
+                    if (variant2.getComponent(i) != 0) {
+                        vector.setComponent(i, -variant2.getComponent(i));
+                    }
+                }
+            }
+            return vector;
         }
     }
 
     public static double calculateScalarProduct(Vector variant1, Vector variant2) {
         double scalarProduct = 0;
-        if (variant1.n >= variant2.n) {
-            for (int i = 0; i < variant2.n; ++i) {
-                scalarProduct = scalarProduct + variant1.vector[i] * variant2.vector[i];
+        if (variant1.getSize() >= variant2.getSize()) {
+            for (int i = 0; i < variant2.getSize(); ++i) {
+                scalarProduct = scalarProduct + variant1.getComponent(i) * variant2.getComponent(i);
             }
             return scalarProduct;
         } else {
             for (int i = 0; i < variant1.n; ++i) {
-                scalarProduct = scalarProduct + variant1.vector[i] * variant2.vector[i];
+                scalarProduct = scalarProduct + variant1.getComponent(i) * variant2.getComponent(i);
             }
             return scalarProduct;
         }
