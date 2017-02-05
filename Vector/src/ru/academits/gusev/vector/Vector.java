@@ -11,25 +11,16 @@ public class Vector {
     }
 
     public Vector(Vector variant) {
-        vector = new double[variant.vector.length];
-        System.arraycopy(variant.vector, 0, this.vector, 0, variant.vector.length);
+        this(variant.vector);
     }
 
-    Vector(double[] variant) {
-        vector = new double[variant.length];
-        System.arraycopy(variant, 0, vector, 0, variant.length);
+    public Vector(double[] variant) {
+        this(variant.length, variant);
     }
 
-    Vector(int n, double[] variant) {
-        if (n < 0) {
-            throw new IllegalArgumentException("Не верное значение");
-        }
-        vector = new double[n];
-        if (n <= variant.length) {
-            System.arraycopy(variant, 0, vector, 0, n);
-        } else {
-            System.arraycopy(variant, 0, vector, 0, variant.length);
-        }
+    public Vector(int n, double[] variant) {
+        this(n);
+        System.arraycopy(variant, 0, vector, 0, Math.min(n, variant.length));
     }
 
     public int getSize() {
@@ -92,17 +83,15 @@ public class Vector {
 
     public Vector multiplyByScalar(double b) {
         for (int i = 0; i < vector.length; ++i) {
-            vector[i] = vector[i] * b;
+            if (vector[i] != 0) {
+                vector[i] = vector[i] * b;
+            }
         }
         return this;
     }
 
-    public Vector unwrap() {
-        for (int i = 0; i < vector.length; ++i) {
-            if (vector[i] != 0) {
-                vector[i] = -vector[i];
-            }
-        }
+    public Vector spread() {
+        multiplyByScalar(-1);
         return this;
     }
 
@@ -126,7 +115,7 @@ public class Vector {
         if (this == o) {
             return true;
         }
-        if (o == null) {
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
         Vector variant = (Vector) o;
@@ -141,8 +130,8 @@ public class Vector {
     public int hashCode() {
         int prime = 31;
         int result = vector.length;
-        for (int i = 0; i < vector.length; ++i) {
-            result = prime * result + (int) vector[i];
+        for (double e : vector) {
+            result = prime * result + (int) e;
         }
         return result;
     }
@@ -159,16 +148,9 @@ public class Vector {
 
     public static double calculateScalarProduct(Vector variant1, Vector variant2) {
         double scalarProduct = 0;
-        if (variant1.getSize() >= variant2.getSize()) {
-            for (int i = 0; i < variant2.getSize(); ++i) {
-                scalarProduct = scalarProduct + variant1.getComponent(i) * variant2.getComponent(i);
-            }
-            return scalarProduct;
-        } else {
-            for (int i = 0; i < variant1.getSize(); ++i) {
-                scalarProduct = scalarProduct + variant1.getComponent(i) * variant2.getComponent(i);
-            }
-            return scalarProduct;
+        for (int i = 0; i < Math.min(variant1.getSize(), variant2.getSize()); ++i) {
+            scalarProduct = scalarProduct + variant1.getComponent(i) * variant2.getComponent(i);
         }
+        return scalarProduct;
     }
 }
