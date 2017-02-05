@@ -191,9 +191,7 @@ public class Vector {
                 if (i < variant1.getSize()) {
                     vector.setComponent(i, variant1.getComponent(i) - variant2.getComponent(i));
                 } else {
-                    if (variant2.getComponent(i) != 0) {
-                        vector.setComponent(i, -variant2.getComponent(i));
-                    }
+                    vector.setComponent(i, vector.getComponent(i) - variant2.getComponent(i));
                 }
             }
             return vector;
