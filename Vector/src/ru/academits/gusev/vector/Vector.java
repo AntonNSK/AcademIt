@@ -1,26 +1,22 @@
 package ru.academits.gusev.vector;
 
 public class Vector {
-    private int n;
     private double[] vector;
 
     public Vector(int n) {
         if (n < 0) {
             throw new IllegalArgumentException("Не верное значение");
         }
-        this.n = n;
         vector = new double[n];
     }
 
     public Vector(Vector variant) {
-        this.n = variant.n;
-        this.vector = new double[n];
-        System.arraycopy(variant.vector, 0, this.vector, 0, variant.n);
+        vector = new double[variant.vector.length];
+        System.arraycopy(variant.vector, 0, this.vector, 0, variant.vector.length);
     }
 
     Vector(double[] variant) {
-        n = variant.length;
-        vector = new double[n];
+        vector = new double[variant.length];
         System.arraycopy(variant, 0, vector, 0, variant.length);
     }
 
@@ -28,7 +24,6 @@ public class Vector {
         if (n < 0) {
             throw new IllegalArgumentException("Не верное значение");
         }
-        this.n = n;
         vector = new double[n];
         if (n <= variant.length) {
             System.arraycopy(variant, 0, vector, 0, n);
@@ -38,15 +33,15 @@ public class Vector {
     }
 
     public int getSize() {
-        return n;
+        return vector.length;
     }
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{ ");
-        for (int i = 0; i < n; ++i) {
+        for (int i = 0; i < vector.length; ++i) {
             sb.append(vector[i]);
-            if (i == n - 1) {
+            if (i == vector.length - 1) {
                 sb.append(" }");
                 break;
             }
@@ -56,56 +51,54 @@ public class Vector {
     }
 
     public Vector sum(Vector variant) {
-        if (n >= variant.n) {
-            for (int i = 0; i < variant.n; ++i) {
+        if (vector.length >= variant.vector.length) {
+            for (int i = 0; i < variant.vector.length; ++i) {
                 vector[i] = vector[i] + variant.vector[i];
             }
             return this;
         } else {
-            double[] vector1 = new double[variant.n];
-            for (int i = 0; i < variant.n; ++i) {
-                if (i < n) {
+            double[] vector1 = new double[variant.vector.length];
+            for (int i = 0; i < variant.vector.length; ++i) {
+                if (i < vector.length) {
                     vector1[i] = vector[i] + variant.vector[i];
                 } else {
                     vector1[i] = variant.vector[i];
                 }
             }
-            n = variant.n;
             vector = vector1;
             return this;
         }
     }
 
     public Vector subtract(Vector variant) {
-        if (n >= variant.n) {
-            for (int i = 0; i < variant.n; ++i) {
+        if (vector.length >= variant.vector.length) {
+            for (int i = 0; i < variant.vector.length; ++i) {
                 vector[i] = vector[i] - variant.vector[i];
             }
             return this;
         } else {
-            double[] vector1 = new double[variant.n];
-            for (int i = 0; i < variant.n; ++i) {
-                if (i < n) {
+            double[] vector1 = new double[variant.vector.length];
+            for (int i = 0; i < variant.vector.length; ++i) {
+                if (i < vector.length) {
                     vector1[i] = vector[i] - variant.vector[i];
                 } else {
                     vector1[i] = vector1[i] - variant.vector[i];
                 }
             }
-            n = variant.n;
             vector = vector1;
             return this;
         }
     }
 
     public Vector multiplyByScalar(double a) {
-        for (int i = 0; i < n; ++i) {
+        for (int i = 0; i < vector.length; ++i) {
             vector[i] = vector[i] * a;
         }
         return this;
     }
 
     public Vector unwrap() {
-        for (int i = 0; i < n; ++i) {
+        for (int i = 0; i < vector.length; ++i) {
             if (vector[i] != 0) {
                 vector[i] = -vector[i];
             }
@@ -115,7 +108,7 @@ public class Vector {
 
     public double length() {
         double sum = 0;
-        for (int i = 0; i < n; ++i) {
+        for (int i = 0; i < vector.length; ++i) {
             sum += Math.pow(vector[i], 2);
         }
         return Math.sqrt(sum);
@@ -137,18 +130,18 @@ public class Vector {
             return false;
         }
         Vector variant = (Vector) o;
-        for (int i = 0; i < n; ++i) {
+        for (int i = 0; i < vector.length; ++i) {
             if (vector[i] - variant.vector[i] >= 0.0001) {
                 return false;
             }
         }
-        return n == variant.n;
+        return vector.length == variant.vector.length;
     }
 
     public int hashCode() {
         int prime = 31;
-        int result = n;
-        for (int i = 0; i < n; ++i) {
+        int result = vector.length;
+        for (int i = 0; i < vector.length; ++i) {
             result = prime * result + (int) vector[i];
         }
         return result;
