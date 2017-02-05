@@ -9,7 +9,7 @@ public class Main {
         Vector vector2 = new Vector(7, array);
         Vector vector3 = new Vector(vector2);
         Vector vector4 = new Vector(6, array);
-        vector4.setComponent(1, 4);
+        vector4.setComponent(1, 5);
         vector4.setComponent(5, 3);
 
 

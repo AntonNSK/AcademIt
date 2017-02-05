@@ -60,7 +60,7 @@ public class Vector {
             for (int i = 0; i < variant.n; ++i) {
                 vector[i] = vector[i] + variant.vector[i];
             }
-            return this;
+            return new Vector(vector);
         } else {
             double[] vector1 = new double[variant.n];
             for (int i = 0; i < variant.n; ++i) {
@@ -70,9 +70,7 @@ public class Vector {
                     vector1[i] = variant.vector[i];
                 }
             }
-            n = variant.n;
-            vector = vector1;
-            return this;
+            return new Vector(vector1);
         }
     }
 
@@ -81,7 +79,7 @@ public class Vector {
             for (int i = 0; i < variant.n; ++i) {
                 vector[i] = vector[i] - variant.vector[i];
             }
-            return this;
+            return new Vector(vector);
         } else {
             double[] vector1 = new double[variant.n];
             for (int i = 0; i < variant.n; ++i) {
@@ -91,9 +89,7 @@ public class Vector {
                     vector1[i] = vector1[i] - variant.vector[i];
                 }
             }
-            n = variant.n;
-            vector = vector1;
-            return this;
+            return new Vector(vector1);
         }
     }
 
@@ -101,7 +97,7 @@ public class Vector {
         for (int i = 0; i < n; ++i) {
             vector[i] = vector[i] * a;
         }
-        return this;
+        return new Vector(vector);
     }
 
     public Vector unwrap() {
@@ -110,7 +106,7 @@ public class Vector {
                 vector[i] = -vector[i];
             }
         }
-        return this;
+        return new Vector(vector);
     }
 
     public double length() {
