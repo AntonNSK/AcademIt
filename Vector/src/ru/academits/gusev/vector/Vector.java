@@ -210,7 +210,7 @@ public class Vector {
             }
             return scalarProduct;
         } else {
-            for (int i = 0; i < variant1.n; ++i) {
+            for (int i = 0; i < variant1.getSize(); ++i) {
                 scalarProduct = scalarProduct + variant1.getComponent(i) * variant2.getComponent(i);
             }
             return scalarProduct;
