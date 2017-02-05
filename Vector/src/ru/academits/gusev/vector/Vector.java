@@ -167,7 +167,7 @@ public class Vector {
             return vector;
         } else {
             Vector vector = new Vector(variant2.getSize());
-            for (int i = 0; i < variant2.n; ++i) {
+            for (int i = 0; i < variant2.getSize(); ++i) {
                 if (i < variant1.getSize()) {
                     vector.setComponent(i, variant1.getComponent(i) + variant2.getComponent(i));
                 } else {
@@ -191,7 +191,7 @@ public class Vector {
             return vector;
         } else {
             Vector vector = new Vector(variant2.getSize());
-            for (int i = 0; i < variant2.n; ++i) {
+            for (int i = 0; i < variant2.getSize(); ++i) {
                 if (i < variant1.getSize()) {
                     vector.setComponent(i, variant1.getComponent(i) - variant2.getComponent(i));
                 } else {
