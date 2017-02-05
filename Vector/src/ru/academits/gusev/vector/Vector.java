@@ -148,51 +148,13 @@ public class Vector {
     }
 
     public static Vector sum(Vector variant1, Vector variant2) {
-        if (variant1.getSize() >= variant2.getSize()) {
-            Vector vector = new Vector(variant1.getSize());
-            for (int i = 0; i < variant1.getSize(); ++i) {
-                if (i < variant2.getSize()) {
-                    vector.setComponent(i, variant1.getComponent(i) + variant2.getComponent(i));
-                } else {
-                    vector.setComponent(i, variant1.getComponent(i));
-                }
-            }
-            return vector;
-        } else {
-            Vector vector = new Vector(variant2.getSize());
-            for (int i = 0; i < variant2.getSize(); ++i) {
-                if (i < variant1.getSize()) {
-                    vector.setComponent(i, variant1.getComponent(i) + variant2.getComponent(i));
-                } else {
-                    vector.setComponent(i, variant2.getComponent(i));
-                }
-            }
-            return vector;
-        }
+        Vector vector = new Vector(variant1);
+        return vector.sum(variant2);
     }
 
     public static Vector subtract(Vector variant1, Vector variant2) {
-        if (variant1.getSize() >= variant2.getSize()) {
-            Vector vector = new Vector(variant1.getSize());
-            for (int i = 0; i < variant1.getSize(); ++i) {
-                if (i < variant2.getSize()) {
-                    vector.setComponent(i, variant1.getComponent(i) - variant2.getComponent(i));
-                } else {
-                    vector.setComponent(i, variant1.getComponent(i));
-                }
-            }
-            return vector;
-        } else {
-            Vector vector = new Vector(variant2.getSize());
-            for (int i = 0; i < variant2.getSize(); ++i) {
-                if (i < variant1.getSize()) {
-                    vector.setComponent(i, variant1.getComponent(i) - variant2.getComponent(i));
-                } else {
-                    vector.setComponent(i, vector.getComponent(i) - variant2.getComponent(i));
-                }
-            }
-            return vector;
-        }
+        Vector vector = new Vector(variant1);
+        return vector.subtract(variant2);
     }
 
     public static double calculateScalarProduct(Vector variant1, Vector variant2) {
