@@ -4,6 +4,7 @@ import com.sun.org.apache.xpath.internal.SourceTree;
 
 public class Main {
     public static void main(String[] args) {
+        int b = 5;
         double[] array = {1.2, 2.3, 1.7, 5.9, 6};
         Vector vector1 = new Vector(3, array);
         Vector vector2 = new Vector(7, array);
@@ -19,7 +20,7 @@ public class Main {
 
         System.out.println("Сумма:" + vector2.sum(vector1).toString());
         System.out.println("Разность:" + vector1.subtract(vector2).toString());
-        System.out.println("Умножение на скаляр (5):" + vector1.multiplyByScalar(5).toString());
+        System.out.println("Умножение на скаляр (5):" + vector1.multiplyByScalar(b).toString());
         System.out.println("Разворот:" + vector1.unwrap().toString());
         System.out.printf("Длина: %.2f" + System.lineSeparator(), vector1.length());
         System.out.println("Компонент под индексом 1:" + vector1.getComponent(1));

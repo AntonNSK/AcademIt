@@ -90,9 +90,9 @@ public class Vector {
         }
     }
 
-    public Vector multiplyByScalar(double a) {
+    public Vector multiplyByScalar(double b) {
         for (int i = 0; i < vector.length; ++i) {
-            vector[i] = vector[i] * a;
+            vector[i] = vector[i] * b;
         }
         return this;
     }
