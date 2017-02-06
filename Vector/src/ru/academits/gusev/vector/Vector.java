@@ -85,9 +85,7 @@ public class Vector {
 
     public Vector multiplyByScalar(double b) {
         for (int i = 0; i < vector.length; ++i) {
-            if (vector[i] != 0) {
-                vector[i] = vector[i] * b;
-            }
+            vector[i] = vector[i] * b;
         }
         return this;
     }
@@ -121,12 +119,15 @@ public class Vector {
             return false;
         }
         Vector variant = (Vector) o;
+        if (vector.length != variant.vector.length) {
+            return false;
+        }
         for (int i = 0; i < vector.length; ++i) {
             if (vector[i] != variant.vector[i]) {
                 return false;
             }
         }
-        return vector.length == variant.vector.length;
+        return true;
     }
 
     public int hashCode() {
