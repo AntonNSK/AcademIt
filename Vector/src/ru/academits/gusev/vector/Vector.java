@@ -1,11 +1,13 @@
 package ru.academits.gusev.vector;
 
+import java.util.Arrays;
+
 public class Vector {
     private double[] vector;
 
     public Vector(int n) {
-        if (n < 0) {
-            throw new IllegalArgumentException("Не верное значение");
+        if (n <= 0) {
+            throw new IllegalArgumentException("Не верное значение, размерность вектора должна быть положительной");
         }
         vector = new double[n];
     }
@@ -97,8 +99,8 @@ public class Vector {
 
     public double length() {
         double sum = 0;
-        for (int i = 0; i < vector.length; ++i) {
-            sum += Math.pow(vector[i], 2);
+        for (double e : vector) {
+            sum += Math.pow(e, 2);
         }
         return Math.sqrt(sum);
     }
@@ -120,7 +122,7 @@ public class Vector {
         }
         Vector variant = (Vector) o;
         for (int i = 0; i < vector.length; ++i) {
-            if (vector[i] - variant.vector[i] >= 0.0001) {
+            if (vector[i] != variant.vector[i]) {
                 return false;
             }
         }
@@ -128,12 +130,7 @@ public class Vector {
     }
 
     public int hashCode() {
-        int prime = 31;
-        int result = vector.length;
-        for (double e : vector) {
-            result = prime * result + (int) e;
-        }
-        return result;
+        return Arrays.hashCode(vector);
     }
 
     public static Vector sum(Vector variant1, Vector variant2) {
@@ -148,7 +145,8 @@ public class Vector {
 
     public static double calculateScalarProduct(Vector variant1, Vector variant2) {
         double scalarProduct = 0;
-        for (int i = 0; i < Math.min(variant1.getSize(), variant2.getSize()); ++i) {
+        int minSize = Math.min(variant1.getSize(), variant2.getSize());
+        for (int i = 0; i < minSize; ++i) {
             scalarProduct = scalarProduct + variant1.getComponent(i) * variant2.getComponent(i);
         }
         return scalarProduct;
