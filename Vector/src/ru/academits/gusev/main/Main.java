@@ -1,5 +1,6 @@
 package ru.academits.gusev.main;
 
+import ru.academits.gusev.matrix.Matrix;
 import ru.academits.gusev.vector.Vector;
 
 public class Main {
@@ -13,18 +14,17 @@ public class Main {
         vector4.setComponent(1, 5);
         vector4.setComponent(5, 3);
 
-        if (vector3.equals(vector2) && vector3.hashCode() == vector2.hashCode()) {
-            System.out.println("Вектор 2 равен вектору 3");
-        }
+        Matrix matrix = new Matrix(2, 3);
+        Matrix matrix2 = new Matrix(matrix);
+        double[][] a = {{1, 3, 7}, {5, 4, 9}};
+        Vector [] v = {vector2, vector3};
+        Matrix matrix3 = new Matrix(v);
+        Matrix matrix1 = new Matrix(a);
+        System.out.println(matrix);
+        System.out.println(matrix1);
+        System.out.println(matrix2);
+        System.out.println(matrix3);
 
-        System.out.println("Сумма:" + vector2.sum(vector1).toString());
-        System.out.println("Разность:" + vector1.subtract(vector2).toString());
-        System.out.println("Умножение на скаляр (5):" + vector1.multiplyByScalar(b).toString());
-        System.out.println("Разворот:" + vector1.spread().toString());
-        System.out.printf("Длина: %.2f" + System.lineSeparator(), vector1.length());
-        System.out.println("Компонент под индексом 1:" + vector1.getComponent(1));
-        System.out.println("Сумма (static):" + Vector.sum(vector3, vector4).toString());
-        System.out.println("Разность (static):" + Vector.subtract(vector4, vector3).toString());
-        System.out.printf("Скалярное произведение:%.2f", Vector.calculateScalarProduct(vector4, vector3));
+
     }
 }

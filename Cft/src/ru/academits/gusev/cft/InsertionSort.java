@@ -1,55 +1,106 @@
 package ru.academits.gusev.cft;
 
-import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class InsertionSort {
-    public static void sortArray(int[] array) {
-        for (int i = 1; i < array.length; ++i) {
+    public static void sortAscending(ArrayList<Integer> arrayList) {
+        for (int i = 1; i < arrayList.size(); ++i) {
             for (int j = 0; j < i; ++j) {
-                if (array[i] < array[j]) {
-                    int number = array[i];
-                    for (int h = i; h > j; --h) {
-                        array[h] = array[h - 1];
-                    }
-                    array[j] = number;
+                if (arrayList.get(i) < arrayList.get(j)) {
+                    arrayList.add(j, arrayList.get(i));
+                    arrayList.remove(i + 1);
                     break;
                 }
             }
         }
-
     }
 
-    public static void main(String[] args) {
-        if (args.length != 4){
+    public static void sortDecreasing(ArrayList<Integer> arrayList) {
+        for (int i = 1; i < arrayList.size(); ++i) {
+            for (int j = 0; j < i; ++j) {
+                if (arrayList.get(i) > arrayList.get(j)) {
+                    arrayList.add(j, arrayList.get(i));
+                    arrayList.remove(i + 1);
+                    break;
+                }
+            }
+        }
+    }
+
+    public static void sortLines(ArrayList<String> arrayList) {
+        for (int i = 1; i < arrayList.size(); ++i) {
+            for (int j = 0; j < i; ++j) {
+                if (arrayList.get(i).compareTo(arrayList.get(j)) < 0) {
+                    arrayList.add(j, arrayList.get(i));
+                    arrayList.remove(i + 1);
+                    break;
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) throws FileNotFoundException {
+        if (args.length != 4) {
             System.out.println("Не верное колличество аргументов");
             return;
         }
-
+        boolean isNumber;
         boolean isAscending;
-        if (args[2].equals("-a")){
+        if (args[2].equals("-i")) {
+            isNumber = true;
+        } else if (args[2].equals("-s")) {
+            isNumber = false;
+        } else {
+            System.out.println("Некорректный аргумент");
+            return;
+        }
+        if (args[3].equals("-a")) {
             isAscending = true;
-        } else if (args[2].equals("-d")){
+        } else if (args[3].equals("-d")) {
             isAscending = false;
         } else {
             System.out.println("Некорректный аргумент");
+            return;
         }
-
-        try(Scanner scanner = new Scanner(new FileInputStream(args[0]))) {
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-
-        int[] array = {90, 25, 50, 10, 16, 1};
-
-
-        sortArray(array);
-        for (int e : array) {
-            System.out.print(e + " ");
+        if (isNumber) {
+            ArrayList<Integer> numbers = new ArrayList<>();
+            try (PrintWriter writer = new PrintWriter(new FileOutputStream(args[1]));
+                 Scanner scanner = new Scanner(new FileInputStream(args[0]))) {
+                while (scanner.hasNextInt()) {
+                    numbers.add(scanner.nextInt());
+                }
+                if (isAscending){
+                    sortAscending(numbers);
+                } else {
+                    sortDecreasing(numbers);
+                }
+                for (int e : numbers) {
+                    writer.println(e);
+                }
+            }
+        } else {
+            ArrayList<String> lines = new ArrayList<>();
+            try (PrintWriter writer = new PrintWriter(new FileOutputStream(args[1]));
+                 Scanner scanner = new Scanner(new FileInputStream(args[0]))) {
+                while (scanner.hasNextLine()) {
+                    lines.add(scanner.nextLine());
+                }
+                if (isAscending) {
+                    sortLines(lines);
+                } else {
+                    System.out.println("Некорректный аргумент");
+                    return;
+                }
+                for (String e : lines) {
+                    writer.println(e);
+                }
+            }
         }
     }
 }
+
