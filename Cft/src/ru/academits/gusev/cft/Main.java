@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class InsertionSort {
+public class Main {
     public static void sortAscending(ArrayList<Integer> arrayList) {
         for (int i = 1; i < arrayList.size(); ++i) {
             for (int j = 0; j < i; ++j) {
@@ -74,7 +74,7 @@ public class InsertionSort {
                 while (scanner.hasNextInt()) {
                     numbers.add(scanner.nextInt());
                 }
-                if (isAscending){
+                if (isAscending) {
                     sortAscending(numbers);
                 } else {
                     sortDecreasing(numbers);
