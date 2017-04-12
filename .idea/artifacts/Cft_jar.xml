@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Cft:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Cft_jar</output-path>
+    <root id="archive" name="Cft.jar">
+      <element id="module-output" name="Cft" />
+    </root>
+  </artifact>
+</component>
