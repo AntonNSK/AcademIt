@@ -18,26 +18,32 @@ public class Main {
 
         try {
             if (args.length != 4) {
-                throw new WrongData("Не верное колличество аргументов" + help);
+                throw new WrongDataException("Не верное количество аргументов" + help);
             }
 
             boolean isNumber;
             boolean isAscending;
 
-            if (args[2].equals("-i")) {
-                isNumber = true;
-            } else if (args[2].equals("-s")) {
-                isNumber = false;
-            } else {
-                throw new WrongData("Некорректный 3й аргумент" + help);
+            switch (args[2]) {
+                case "-i":
+                    isNumber = true;
+                    break;
+                case "-s":
+                    isNumber = false;
+                    break;
+                default:
+                    throw new WrongDataException("Некорректный 3й аргумент" + help);
             }
 
-            if (args[3].equals("-a")) {
-                isAscending = true;
-            } else if (args[3].equals("-d")) {
-                isAscending = false;
-            } else {
-                throw new WrongData("Некорректный 4й аргумент" + help);
+            switch (args[3]) {
+                case "-a":
+                    isAscending = true;
+                    break;
+                case "-d":
+                    isAscending = false;
+                    break;
+                default:
+                    throw new WrongDataException("Некорректный 4й аргумент" + help);
             }
 
             try (PrintWriter writer = new PrintWriter(new FileOutputStream(args[1]));
@@ -75,7 +81,7 @@ public class Main {
                 System.out.println("Файл не найден" + help);
             }
 
-        } catch (WrongData e) {
+        } catch (WrongDataException e) {
             System.out.println(e.getMessage());
         }
     }
